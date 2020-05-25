@@ -3,7 +3,7 @@
 
   <arg name="simulation" default="true"/>
 
-  <!-- Launch RVIZ -->
+  <!-- Launch RVIZ TODO, Move to jimmbot_viz -->
   <arg default="$(find jimmbot_control)/launch/urdf.rviz" name="rvizconfig" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
 
@@ -14,13 +14,13 @@
   <rosparam command="load" file="$(find jimmbot_control)/config/controller.yaml" />
 
   <!-- Publish joint states as tf from URDF -->
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
+  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
     <remap from="/joint_states" to="/jimmbot/joint_states"/>
-  </node>
+  </node> -->
 
   <!-- Convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" output="screen" pkg="robot_state_publisher" respawn="false" type="robot_state_publisher">
-    <remap from="/joint_states" to="/jimmbot/joint_states"/>
+    <!-- <remap from="/joint_states" to="/jimmbot/joint_states"/> -->
   </node>
 
   <!-- Spawn controllers -->

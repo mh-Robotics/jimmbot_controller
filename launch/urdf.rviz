@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /RobotModel1/Links1
       Splitter Ratio: 0.5382353067398071
     Tree Height: 1068
   - Class: rviz/Selection
@@ -131,6 +130,42 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        differential_rod_back_left:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        differential_rod_back_right:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        differential_rod_differential_back_left:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        differential_rod_differential_back_right:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        differential_rod_differential_front_left:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        differential_rod_differential_front_right:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        differential_rod_front_left:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        differential_rod_front_right:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         wheel_axis_back_left:
           Alpha: 1
           Show Axes: false
@@ -210,6 +245,24 @@ Visualization Manager:
           Value: true
         differential_right_front:
           Value: true
+        differential_rod_back_left:
+          Value: true
+        differential_rod_back_right:
+          Value: true
+        differential_rod_differential_back_left:
+          Value: true
+        differential_rod_differential_back_right:
+          Value: true
+        differential_rod_differential_front_left:
+          Value: true
+        differential_rod_differential_front_right:
+          Value: true
+        differential_rod_front_left:
+          Value: true
+        differential_rod_front_right:
+          Value: true
+        odom:
+          Value: true
         wheel_axis_back_left:
           Value: true
         wheel_axis_back_right:
@@ -258,14 +311,24 @@ Visualization Manager:
                   {}
             differential_back:
               differential_left_back:
-                {}
+                differential_rod_differential_back_left:
+                  differential_rod_back_left:
+                    {}
               differential_right_back:
-                {}
+                differential_rod_differential_back_right:
+                  differential_rod_back_right:
+                    {}
             differential_front:
               differential_left_front:
-                {}
+                differential_rod_differential_front_left:
+                  differential_rod_front_left:
+                    {}
               differential_right_front:
-                {}
+                differential_rod_differential_front_right:
+                  differential_rod_front_right:
+                    {}
+        odom:
+          {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -296,25 +359,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 1.2146577835083008
+      Distance: 3.39389705657959
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.08110127598047256
-        Y: -0.051305122673511505
-        Z: -0.04105319827795029
+        X: 0.017296168953180313
+        Y: 0.06088060140609741
+        Z: -0.17124101519584656
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.625399112701416
+      Pitch: 0.5697968006134033
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.303591251373291
+      Yaw: 5.273595333099365
     Saved:
       - Class: rviz/Orbit
         Distance: 2.4508087635040283
