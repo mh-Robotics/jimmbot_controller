@@ -4,14 +4,14 @@
   <arg name="simulation" default="true"/>
 
   <!-- Launch RVIZ TODO, Move to jimmbot_viz -->
-  <arg default="$(find jimmbot_control)/launch/urdf.rviz" name="rvizconfig" />
+  <arg default="$(find jimmbot_controller)/launch/urdf.rviz" name="rvizconfig" />
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
 
   <!-- Load robot description -->
   <include file="$(find jimmbot_description)/launch/description.launch" />
 
   <!-- Load controller configuration -->
-  <rosparam command="load" file="$(find jimmbot_control)/config/controller.yaml" />
+  <rosparam command="load" file="$(find jimmbot_controller)/config/controller.yaml" />
 
   <!-- Publish joint states as tf from URDF -->
   <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
