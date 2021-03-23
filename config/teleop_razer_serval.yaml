@@ -1,0 +1,13 @@
+teleop_twist_joy:
+  axis_linear: 1
+  scale_linear: 0.2
+  scale_linear_turbo: 2.0
+  axis_angular: 0
+  scale_angular: 1.5
+  scale_angular_turbo: 2.5
+  enable_button: 4
+  enable_turbo_button: 5
+joy_node:
+  deadzone: 0.1
+  autorepeat_rate: 50
+  dev: /dev/input/js4

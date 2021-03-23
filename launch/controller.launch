@@ -1,11 +1,30 @@
 <?xml version="1.0"?>
+<!-- 
+MIT License
+
+@file      controller.launch
+@author    Mergim Halimi (m.halimi123@gmail.com)
+@copyright Copyright (c) 2020, mhRobotics, Inc., All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ -->
 <launch>
-
-  <arg name="simulation" default="true"/>
-
-  <!-- Launch RVIZ TODO, Move to jimmbot_viz -->
-  <arg default="$(find jimmbot_controller)/launch/urdf.rviz" name="rvizconfig" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
 
   <!-- Load robot description -->
   <include file="$(find jimmbot_description)/launch/description.launch" />
@@ -13,23 +32,16 @@
   <!-- Load controller configuration -->
   <rosparam command="load" file="$(find jimmbot_controller)/config/controller.yaml" />
 
-  <!-- Publish joint states as tf from URDF -->
-  <!-- <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" >
-    <remap from="/joint_states" to="/jimmbot/joint_states"/>
-  </node> -->
-
-  <!-- Convert joint states to TF transforms for rviz, etc -->
-  <node name="robot_state_publisher" output="screen" pkg="robot_state_publisher" respawn="false" type="robot_state_publisher">
-    <!-- <remap from="/joint_states" to="/jimmbot/joint_states"/> -->
-  </node>
-
   <!-- Spawn controllers -->
   <node name="jimmbot_controller_spawner" pkg="controller_manager" type="spawner" respawn="true" output="screen"
         args="jimmbot_controller/jimmbot_joint_publisher jimmbot_controller/jimmbot_velocity_controller"/>
-      
-  <!-- Use the gui to control the speed -->
-  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
-    <param name="default_topic" value="/jimmbot_controller/jimmbot_velocity_controller/cmd_vel"/> 
+
+  <!-- Start EKF localization node -->
+  <node pkg="robot_localization" type="ekf_localization_node" name="jimmbot_ekf_robot_localization">
+    <rosparam command="load" file="$(find jimmbot_controller)/config/localization.yaml" />
   </node>
+
+  <!-- Convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
 </launch>
