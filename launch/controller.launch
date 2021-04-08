@@ -41,6 +41,11 @@ SOFTWARE.
     <rosparam command="load" file="$(find jimmbot_controller)/config/localization.yaml" />
   </node>
 
+  <!-- Start twist marker -->
+  <node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server" output="screen">
+    <remap from="twist_marker_server/cmd_vel" to="jimmbot_controller/jimmbot_velocity_controller/cmd_vel"/>
+  </node>
+
   <!-- Convert joint states to TF transforms for rviz, etc -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
 
