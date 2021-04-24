@@ -13,8 +13,8 @@ jimmbot_controller:
     right_wheel: ['wheel_axis_front_right_to_wheel_front_right','wheel_axis_back_right_to_wheel_back_right']
 
     # Tune for your hardware
-    wheel_separation: 1.0
-    wheel_separation_multiplier: 2.0
+    wheel_separation: 0.54
+    wheel_separation_multiplier: 1.0
     wheel_radius: 0.08255
     wheel_radius_multiplier: 1.0
 
