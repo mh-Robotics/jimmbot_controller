@@ -1,16 +1,18 @@
 jimmbot_controller:
-  # Publish all joint states -----------------------------------
+  # Publish all joint states
   jimmbot_joint_publisher:
     type: joint_state_controller/JointStateController
     publish_rate: 50
 
-  # Position Controllers --------------------------------------
+  # Velocity Controller
   jimmbot_velocity_controller:
     type: "diff_drive_controller/DiffDriveController"
     publish_rate: 50
 
     left_wheel: ['wheel_axis_front_left_to_wheel_front_left','wheel_axis_back_left_to_wheel_back_left']
     right_wheel: ['wheel_axis_front_right_to_wheel_front_right','wheel_axis_back_right_to_wheel_back_right']
+
+    pid: {p: 100.0, i: 0.01, d: 10.0}
 
     # Tune for your hardware
     wheel_separation: 0.54
@@ -40,8 +42,20 @@ jimmbot_controller:
         has_acceleration_limits: true
         max_acceleration       : 9.0  # rad/s^2
 
-# gazebo_ros_control/pid_gains:
-#   wheel_axis_front_left_to_wheel_front_left: {p: 9.4833, i: 0.1625, d: 0.040625}
-#   wheel_axis_back_left_to_wheel_back_left: {p: 9.4833, i: 0.1625, d: 0.040625}
-#   wheel_axis_front_right_to_wheel_front_right: {p: 9.4833, i: 0.1625, d: 0.040625}
-#   wheel_axis_back_right_to_wheel_back_right: {p: 9.4833, i: 0.1625, d: 0.040625}
+  # Position Controller
+  kinect_front_position_controller:
+    type: position_controllers/JointPositionController
+    joint: chassis_to_kinect_front
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  kinect_back_position_controller:
+    type: position_controllers/JointPositionController
+    joint: chassis_to_kinect_back
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+gazebo_ros_control/pid_gains:
+  # wheel_axis_front_left_to_wheel_front_left: {p: 100.0, i: 0.01, d: 10.0}
+  # wheel_axis_back_left_to_wheel_back_left: {p: 100.0, i: 0.01, d: 10.0}
+  # wheel_axis_front_right_to_wheel_front_right: {p: 100.0, i: 0.01, d: 10.0}
+  # wheel_axis_back_right_to_wheel_back_right: {p: 100.0, i: 0.01, d: 10.0}
+  chassis_to_kinect_front: {p: 100.0, i: 0.01, d: 10.0}
+  chassis_to_kinect_back: {p: 100.0, i: 0.01, d: 10.0}

@@ -1,3 +1,11 @@
+jimmbot_extended_joy:
+  axis_linear_tilt: 3
+  max_angle_tilt: 30
+  inverse_movement: 3
+  left_light_bulb: 5
+  right_light_bulb: 4
+  horn: 0
+
 teleop_twist_joy:
   axis_linear: 1
   scale_linear: 1
@@ -7,7 +15,8 @@ teleop_twist_joy:
   scale_angular_turbo: 2.5
   enable_button: 4
   enable_turbo_button: 5
+
 joy_node:
   deadzone: 0.1
   autorepeat_rate: 50
-  dev: /dev/input/js4
+  dev: /dev/input/js0

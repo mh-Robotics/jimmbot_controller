@@ -34,12 +34,37 @@ SOFTWARE.
 
   <!-- Spawn controllers -->
   <node name="jimmbot_controller_spawner" pkg="controller_manager" type="spawner" respawn="true" output="screen"
-        args="jimmbot_controller/jimmbot_joint_publisher jimmbot_controller/jimmbot_velocity_controller"/>
+        args="jimmbot_controller/jimmbot_joint_publisher 
+              jimmbot_controller/jimmbot_velocity_controller 
+              jimmbot_controller/kinect_front_position_controller 
+              jimmbot_controller/kinect_back_position_controller"/>
+
+  <!-- Load localization configuration -->
+  <rosparam command="load" file="$(find jimmbot_controller)/config/localization.yaml" />
 
   <!-- Start EKF localization node -->
-  <node pkg="robot_localization" type="ekf_localization_node" name="jimmbot_ekf_robot_localization">
-    <rosparam command="load" file="$(find jimmbot_controller)/config/localization.yaml" />
-  </node>
+  <node pkg="robot_localization" type="ekf_localization_node" name="jimmbot_ekf_robot_localization" clear_params="true" />
+
+  <!-- Start EKF localization node from map-->
+  <!-- <node pkg="robot_localization" type="ekf_localization_node" name="jimmbot_ekf_robot_localization_map" clear_params="true">
+    <remap from="odometry/filtered" to="odometry/filtered_map"/>
+  </node> -->
+
+  <!-- Start Navsat transformation node for front GPS-->
+  <!-- <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node_front" clear_params="true">
+    <remap from="/imu/data" to="/imu" />
+    <remap from="/gps/fix" to="/gps/fix_front" />
+    <remap from="odometry/filtered" to="odometry/filtered_map"/>
+    <remap from="/odometry/gps" to="/odometry/gps_front" />
+  </node> -->
+
+  <!-- Start Navsat transformation node for back GPS -->
+  <!-- <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node_back" clear_params="true">
+    <remap from="/imu/data" to="/imu" />
+    <remap from="/gps/fix" to="/gps/fix_back" />
+    <remap from="odometry/filtered" to="odometry/filtered_map"/>
+    <remap from="/odometry/gps" to="/odometry/gps_back" />
+  </node> -->
 
   <!-- Start twist marker -->
   <node pkg="interactive_marker_twist_server" type="marker_server" name="twist_marker_server" output="screen">
