@@ -23,7 +23,8 @@ jimmbot_controller:
     pose_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
     twist_covariance_diagonal: [0.001, 0.001, 0.001, 0.001, 0.001, 0.03]
 
-    enable_odom_tf: false
+    # Individually set for manual and base launch files
+    # enable_odom_tf: false
 
     # Top level frame (link) of the robot description
     base_frame_id: base_link
@@ -43,14 +44,14 @@ jimmbot_controller:
         max_acceleration       : 9.0  # rad/s^2
 
   # Position Controller
-  kinect_front_position_controller:
-    type: position_controllers/JointPositionController
-    joint: chassis_to_kinect_front
-    pid: {p: 100.0, i: 0.01, d: 10.0}
-  kinect_back_position_controller:
-    type: position_controllers/JointPositionController
-    joint: chassis_to_kinect_back
-    pid: {p: 100.0, i: 0.01, d: 10.0}
+  # kinect_front_position_controller:
+  #   type: position_controllers/JointPositionController
+  #   joint: chassis_to_kinect_front
+  #   pid: {p: 100.0, i: 0.01, d: 10.0}
+  # kinect_back_position_controller:
+  #   type: position_controllers/JointPositionController
+  #   joint: chassis_to_kinect_back
+  #   pid: {p: 100.0, i: 0.01, d: 10.0}
 
 gazebo_ros_control/pid_gains:
   # wheel_axis_front_left_to_wheel_front_left: {p: 100.0, i: 0.01, d: 10.0}
